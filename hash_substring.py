@@ -3,10 +3,11 @@
 def read_input():
         file_type = input().strip()
         if file_type == 'F':
-            file_name = input()
+            # file_name = input()
+            file_name = '06'
 
-            if 'a' in file_name:
-                return
+            # if 'a' in file_name:
+            #     return
             if 'tests/' not in file_name:
                 file_name = 'tests/' + file_name
             with open(file_name) as f:
