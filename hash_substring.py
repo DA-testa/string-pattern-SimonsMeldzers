@@ -28,22 +28,22 @@ def get_occurrences(pattern, text):
     n = len(pattern)
     t = len(text)
     
+    pattern_hash = 0
+    for i in range(n):
+        pattern_hash = (pattern_hash * p + ord(pattern[i])) % m
+
     text_hash = 0
     for i in range(n):  
         text_hash = (text_hash * p + ord(text[i])) % m
 
-    pattern_hash = 0
-    for i in range(n):
-        pattern_hash = (pattern_hash * p + ord(text[i])) % m
-
     occurrences = []
-    if text_hash == pattern_hash and pattern == text[:n]:
+    if pattern_hash == text_hash and pattern == text[:n]:
         occurrences.append(0)
 
     p_pow = pow(p, n-1, m)
     for i in range(1, t-n+1):
-        text_hash = (text_hash - ord(text[i]) * p_pow) % m
-        text_hash = (text_hash * p + ord(text[i])) % m
+        text_hash = (text_hash - ord(text[i-1]) * p_pow) % m
+        text_hash = (text_hash * p + ord(text[i+n-1])) % m
 
         if pattern_hash == text_hash and pattern == text[i:i+n]:
             occurrences.append(i)
