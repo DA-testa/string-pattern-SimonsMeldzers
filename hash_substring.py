@@ -11,13 +11,11 @@ def read_input():
                 file_name = 'tests/' + file_name
             with open(file_name) as f:
                 pattern = f.readline().strip()
-                text = input().strip()
+                text = f.readline().strip()
 
         elif file_type == 'I':
-            pattern = f.readline().strip()
+            pattern = input().strip()
             text = input().strip()
-        else:
-            return 'Error'
 
         return pattern, text
 
@@ -40,12 +38,14 @@ def get_occurrences(pattern, text):
 
     occurrences = []
     if text_hash == pattern_hash and pattern == text[:n]:
-        occurrences.append()
+        occurrences.append(0)
 
-    for i in range(t-n+1):
-        text_hash = ((text_hash - ord(text[i])) % m) * (p + ord(text(i+n)) % m)
+    p_pow = pow(p, n-1, m)
+    for i in range(1, t-n+1):
+        text_hash = (text_hash - ord(text[i]) * p_pow) % m
+        text_hash = (text_hash * p + ord(text[i])) % m
 
-        if pattern_hash == text_hash:
+        if pattern_hash == text_hash and pattern == text[i:i+n]:
             occurrences.append(i)
 
     return occurrences
