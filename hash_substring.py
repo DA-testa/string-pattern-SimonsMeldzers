@@ -3,13 +3,13 @@
 def read_input():
         file_type = input().strip()
         if file_type == 'F':
-            # file_name = input()
-            file_name = 'tests/06'
+            file_name = input()
+            # file_name = 'tests/06'
 
-            # if 'a' in file_name:
-            #     return
-            # if 'tests/' not in file_name:
-            #     file_name = 'tests/' + file_name
+            if 'a' in file_name:
+                return
+            if 'tests/' not in file_name:
+                file_name = 'tests/' + file_name
             with open(file_name, 'r') as f:
                 pattern = f.readline().strip()
                 text = f.readline().strip()
